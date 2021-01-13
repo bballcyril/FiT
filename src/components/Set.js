@@ -2,7 +2,7 @@ import React from 'react'
 
 function Set(props) {
     return (
-    <li>{props.name}</li>
+    <div>{props.name}</div>
     )
 }
 
