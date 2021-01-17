@@ -1,4 +1,4 @@
-# FiT (React)
+# FiT 
 
 Simple fitness app that records and tracks your workouts.
 
