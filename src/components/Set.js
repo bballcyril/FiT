@@ -12,9 +12,9 @@ function Set({ id, removeSet, changeLBS, changeReps }) {
   }
   return (
     <div style={{ display: "flex", justifyContent: "center" }} className="set">
-      <TextField type="number" placeholder="Weight" onChange={handleLBS} />
+      <TextField type="number" placeholder="lbs" onChange={handleLBS} />
       <TextField style={{marginLeft:'20px'}}type="number" placeholder="Reps" onChange={handleReps} />
-      <Button style={{width:'20px'}}size='small'variant='contained' color='secondary'onClick={handleRemove}>X</Button>
+      <Button style={{width:'20px',marginLeft:'10px'}}size='small'variant='contained' color='secondary'onClick={handleRemove}>X</Button>
     </div>
   );
 }
