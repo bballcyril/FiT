@@ -19,10 +19,7 @@ const Exercise = ({ name, id, removeExercise }) => {
   }
   return (
     <div className="container">
-      <h1
-        contentEditable="true"
-        onKeyDown={handleKeyPress}
-      >
+      <h1 contentEditable="true" onKeyDown={handleKeyPress}>
         {name}
       </h1>
 
@@ -30,7 +27,7 @@ const Exercise = ({ name, id, removeExercise }) => {
       <button onClick={() => setSets([...sets, { id: uuid() }])}>
         Add Set
       </button>
-      <br/>
+      <br />
       <button onClick={handleRemoveExercise}>Remove Exercise</button>
     </div>
   );

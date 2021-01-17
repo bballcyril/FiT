@@ -15,11 +15,16 @@ function ExerciseList() {
       {exercises.map((exercise) => {
         return (
           <>
-            <Exercise key={exercise.id} id={exercise.id}name={exercise.name} removeExercise={removeExercise} />
+            <Exercise
+              key={exercise.id}
+              id={exercise.id}
+              name={exercise.name}
+              removeExercise={removeExercise}
+            />
           </>
         );
       })}
-      <br/>
+      <br />
       <button
         onClick={() =>
           setExercises([
