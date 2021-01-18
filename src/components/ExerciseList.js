@@ -6,30 +6,54 @@ import {Button} from "@material-ui/core"
 const LOCAL_STORAGE_KEY = "exerciseList";
 function ExerciseList() {
   let [exercises, setExercises] = useState([
-    { id: uuid(), name: `Exercise 1`, sets: [{ lbs: 0, reps: 0 }] },
-  ]);
+    { id: uuid(), name: `Exercise 1`, sets: [{ setId:uuid(),lbs: 0, reps: 0 }]}]);
 
+  function addSet(exerciseId){
+    let newArr = [...exercises];
+    const index = newArr.findIndex((element) =>element.id===exerciseId);
+    newArr[index].sets.push({setId:uuid(),lbs:0,reps:0})
+    setExercises(newArr)
+  }
+  function removeSet(exerciseId,id){
+    let newArr = [...exercises];
+    const index = newArr.findIndex((element) =>element.id===exerciseId);
+    const setIndex = newArr[index].sets.findIndex((element)=>element.setId ===id)
+    newArr[index].sets.splice(setIndex,1);
+    setExercises(newArr)
+  }
+  function changeLbs(exerciseId,id,value){
+    let newArr = [...exercises];
+    const index = newArr.findIndex((element) =>element.id===exerciseId);
+    const setIndex = newArr[index].sets.findIndex((element)=>element.setId ===id)
+    newArr[index].sets[setIndex] = {...newArr[index].sets[setIndex],lbs:value}
+    console.log(newArr[index].sets[setIndex], id)
+    setExercises(newArr)
+  }
+  function changeReps(exerciseId,id,value){
+    let newArr = [...exercises];
+    const index = newArr.findIndex((element) =>element.id===exerciseId);
+    const setIndex = newArr[index].sets.findIndex((element)=>element.setId ===id)
+    newArr[index].sets[setIndex] = {...newArr[index].sets[setIndex],reps:value}
+    console.log(newArr[index].sets[setIndex], id)
+    setExercises(newArr)
+  }
   function removeExercise(id) {
     setExercises(exercises.filter((exercise) => id !== exercise.id));
   }
   function changeName(id, value) {
     let newArr = [...exercises];
     const index = newArr.findIndex((element) => element.id === id);
-    newArr[index] = { id: id, name: value };
+    newArr[index] = {...newArr[index], id: id, name: value };
     setExercises(newArr);
   }
-  function changeSets(id, value) {
-    let newArr = [...exercises];
-    const index = newArr.findIndex((element) => element.id === id);
-    newArr[index] = { ...newArr[index], sets: value };
-    setExercises(newArr);
-  }
+  
   function handleClick() {
     setExercises([
       ...exercises,
-      { id: uuid(), name: `Exercise ${exercises.length + 1}` },
+      { id: uuid(), name: `Exercise ${exercises.length + 1}`,sets:[{ id:uuid(),lbs: 0, reps: 0 }] },
     ]);
   }
+  
   useEffect(() => {
     const storageExercises = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -55,7 +79,10 @@ function ExerciseList() {
               removeExercise={removeExercise}
               changeName={changeName}
               sets={exercise.sets}
-              changeSets={changeSets}
+              addSet={addSet}
+              removeSet={removeSet}
+              changeLbs={changeLbs}
+              changeReps={changeReps}
             />
           </>
         );

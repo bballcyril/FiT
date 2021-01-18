@@ -1,26 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Set from "./Set";
-import { v4 as uuid } from "uuid";
+
 import {Button} from "@material-ui/core"
 
-function SetList(props) {
-  let [sets, setSets] = useState([{ id: uuid(), lbs: 0, reps: 0 }]);
-  
-  function changeLBS(id, lbs) {
-    let newArr = [...sets];
-    const index = newArr.findIndex((element) => element.id === id);
-    newArr[index] = { ...newArr[index], lbs: lbs };
-    setSets(newArr);
-  }
-  
-  function changeReps(id, reps) {
-    let newArr = [...sets];
-    const index = newArr.findIndex((element) => element.id === id);
-    newArr[index] = { ...newArr[index], reps: reps };
-    setSets(newArr);
-  }
-  function removeSet(id) {
-    setSets(sets.filter((set) => id !== set.id));
+function SetList({sets,addSet,removeSet,id,changeReps,changeLbs}) {
+
+  function handleAddSet(){
+    addSet(id)
   }
   return (
     <>
@@ -28,21 +14,24 @@ function SetList(props) {
         {sets.map((currentSet) => {
           return (
             <Set
-              key={currentSet.id}
-              id={currentSet.id}
+              key={currentSet.setId}
+              exerciseId={id}
+              id={currentSet.setId}
               name={currentSet.name}
               removeSet={removeSet}
-              changeLBS={changeLBS}
               changeReps={changeReps}
+              changeLbs={changeLbs}
+              lbs={currentSet.lbs}
+              reps={currentSet.reps}
             />
           );
         })}
       </ul>
-      <Button variant='outlined' color='primary'onClick={() => setSets([...sets, { id: uuid() }])}>
+      <Button variant='outlined' color='primary' onClick={handleAddSet}>
         Add Set
       </Button>
     </>
   );
 }
-
+//onClick={() => setSets([...sets, { id: uuid() }])}
 export default SetList;
