@@ -68,7 +68,7 @@ function ExerciseList() {
   }, [exercises]);
 
   return (
-    <>
+    <div className='exerciseList'>
       {exercises.map((exercise) => {
         return (
           <>
@@ -89,7 +89,7 @@ function ExerciseList() {
       })}
       <br />
       <Button variant='contained'onClick={handleClick}>Add Exercise</Button>
-    </>
+    </div>
   );
 }
 
